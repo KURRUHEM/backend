@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Tinder for practise",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [
+    "nodejs",
+    "js"
+  ],
+  "author": "kurru",
+  "license": "ISC",
+  "dependencies": {
+    "-": "^0.0.1",
+    "express": "^5.1.0",
+    "g": "^2.0.1",
+    "nodemon": "^3.1.10"
+  }
+}
