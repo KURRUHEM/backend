@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const { isEmail, isStrongPassword, isURL } = require('validator');
+const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
@@ -34,8 +37,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      minLength: 8,
-      maxLength: 16,
       validate(value) {
         if (!isStrongPassword(value)) {
           throw new Error("Password doesn't meet criteria !!")
@@ -79,5 +80,17 @@ const userSchema = new Schema(
     timestamps: true
   }
 );
+
+
+userSchema.methods.getJWT = async function() {
+  const user = this;
+  return await jwt.sign({id: user._id}, "DEVTinder@2025", {expiresIn: "10000"});
+
+}
+
+userSchema.methods.validatePassword = async function (userPassword) {
+  const user = this;
+  return await bcrypt.compare(userPassword, user.password)
+}
 
 module.exports = mongoose.model("User", userSchema);
