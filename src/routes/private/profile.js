@@ -4,9 +4,9 @@ const { userAuth }  = require('./../../middlewares/auth-midddleware');
 const User = require('./../../models/user');
 
 
-const userRouter = express.Router();
+const profileRouter = express.Router();
 
-userRouter.get('/user', userAuth, async (req, res) => {
+profileRouter.get('/user', userAuth, async (req, res) => {
 
   try {
     const user = req.user;
@@ -16,7 +16,7 @@ userRouter.get('/user', userAuth, async (req, res) => {
   }
 });
 
-userRouter.patch('/user/:userId', async (req, res) => {
+profileRouter.patch('/user/:userId', async (req, res) => {
   const userId = req.params?.userId;
   const user = req.body;
   console.log('Testing update req body::::', user);
@@ -40,7 +40,7 @@ userRouter.patch('/user/:userId', async (req, res) => {
   }
 });
 
-userRouter.delete('/user', async (req, res) => {
+profileRouter.delete('/user', async (req, res) => {
 
   const userId = req.body.userId;
   try {
@@ -52,4 +52,4 @@ userRouter.delete('/user', async (req, res) => {
 });
 
 
-module.exports = userRouter;
+module.exports = profileRouter;
